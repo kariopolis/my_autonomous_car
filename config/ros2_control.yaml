@@ -1,0 +1,12 @@
+ros2_control:
+  ros__parameters:
+    update_rate: 100
+    joints:
+      - left_front_axis_joint
+      - right_front_axis_joint
+
+    joint_steering_controller:
+      type: position_controllers/JointGroupPositionController
+      joints:
+        - left_front_axis_joint
+        - right_front_axis_joint
