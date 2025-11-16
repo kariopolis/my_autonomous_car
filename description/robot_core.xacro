@@ -22,8 +22,9 @@
 
 
     <!--BASE LINK-->
-    
-    <link name="base_link">    
+
+    <link name="base_link"> 
+        <origin xyz="0 0 0.07 "/>   
     </link>
 
 
@@ -55,6 +56,10 @@
         </xacro:inertial_box>
     </link>
 
+    <gazebo reference="back_chassis">
+        <material>Gazebo/Black</material>
+    </gazebo>
+
 
     <!--FRONT CHSASSIS LINK-->
 
@@ -82,6 +87,10 @@
             <origin xyz="0.06 0 0.025" rpy="0 0 0"/>
         </xacro:inertial_box>  
     </link>
+
+    <gazebo reference="front_chassis">
+        <material>Gazebo/Black</material>
+    </gazebo>
 
 
     <!-- STEERING ROD -->
@@ -111,6 +120,9 @@
         </xacro:inertial_box>
     </link>
     
+    <gazebo reference="steering_rod">
+        <material>Gazebo/Black</material>
+    </gazebo>
 
     <!--LEFT BACK WHEEL'S AXIS-->
 
@@ -138,6 +150,9 @@
         </xacro:inertial_cylinder>
     </link>
 
+    <gazebo reference="left_back_axis">
+        <material>Gazebo/Orange</material>
+    </gazebo>
 
     <!--Left back wheel-->
 
@@ -146,6 +161,8 @@
         <child link="left_back_wheel"/>
         <origin xyz="0 0 0.0175"/>
         <axis xyz="0 0 1"/> 
+        <limit effort="1000" velocity="10"/>
+        <dynamics damping="1.0" friction="1.0"/>
     </joint>
 
     <link name = "left_back_wheel">
@@ -165,7 +182,9 @@
         </xacro:inertial_cylinder>
     </link>
 
-
+    <gazebo reference="left_back_wheel">
+        <material>Gazebo/White</material>
+    </gazebo>
 
     <!--Right BACK WHEEL'S AXIS-->
 
@@ -193,7 +212,9 @@
         </xacro:inertial_cylinder>
     </link>
 
-
+    <gazebo reference="right_back_axis">
+        <material>Gazebo/Orange</material>
+    </gazebo>
 
     <!--Right back wheel-->
 
@@ -202,6 +223,8 @@
         <child link="right_back_wheel"/>
         <origin xyz="0 0 0.0175"/>
         <axis xyz="0 0 -1"/>
+        <limit effort="1000" velocity="10"/>
+        <dynamics damping="1.0" friction="1.0"/>
     </joint>
 
     <link name = "right_back_wheel">
@@ -221,16 +244,19 @@
         </xacro:inertial_cylinder>
     </link>
 
-
+    <gazebo reference="right_back_wheel">
+        <material>Gazebo/White</material>
+    </gazebo>
 
     <!--Front left axis-->
    
     <joint name="left_front_axis_joint" type="revolute">
         <parent link="base_link"/>
         <child link="left_front_axis"/>
-        <origin xyz="0.17 0.06 0" rpy="-${pi/2} 0 0"/>
-        <axis xyz="0 1 0"/> <!-- rotation around Y-axis -->
-        <limit lower="-0.523599" upper="0.523599" effort="100" velocity="1.0"/>
+        <origin xyz="0.17 0.06 0" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/> <!-- rotation around Y-axis -->
+        <limit lower="-0.523599" upper="0.523599" effort="1000" velocity="5.0"/>
+        <dynamics damping="1.0" friction="1.0"/>
     </joint>
 
 
@@ -251,13 +277,15 @@
         </xacro:inertial_cylinder>
     </link>
 
-
+    <gazebo reference="left_front_axis">
+        <material>Gazebo/Orange</material>
+    </gazebo>
 
     <!--FRONT LEFT WHEEL-->
     <joint name = "left_front_wheel_joint" type="continuous">
         <parent link="left_front_axis"/>
         <child link="left_front_wheel"/>
-        <origin xyz="0 0 0.0175"/>
+        <origin xyz="0 0.0175 0" rpy="-${pi/2} 0 0"/>
         <axis xyz="0 0 1"/> <!--for wheel to spin around z axis-->
     </joint>
 
@@ -278,17 +306,19 @@
         </xacro:inertial_cylinder>
     </link>
 
-
+    <gazebo reference="left_front_wheel">
+        <material>Gazebo/White</material>
+    </gazebo>
 
     <!--FRON RIGHT AXIS-->
 
     <joint name="right_front_axis_joint" type="revolute">
         <parent link="base_link"/>
         <child link="right_front_axis"/>
-        <origin xyz="0.17 -0.06 0" rpy="${pi/2} 0 0"/>
-        <axis xyz="0 1 0"/>
-        <limit lower="-0.523599" upper="0.523599" effort="100" velocity="1.0"/>
-        <mimic joint="left_front_axis_joint" multiplier="-1.0" offset="0.0"/>
+        <origin xyz="0.17 -0.06 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-0.523599" upper="0.523599" effort="1000" velocity="5.0"/>
+        <dynamics damping="1.0" friction="1.0"/>
     </joint>
 
     <link name="right_front_axis">
@@ -308,14 +338,16 @@
         </xacro:inertial_cylinder>
     </link>
 
-
+    <gazebo reference="right_front_axis">
+        <material>Gazebo/Orange</material>
+    </gazebo>
 
     <!--Right front wheel-->
 
     <joint name = "right_front_wheel_joint" type="continuous">
         <parent link="right_front_axis"/>
         <child link="right_front_wheel"/>
-        <origin xyz="0 0 0.0175"/>
+        <origin xyz="0 -0.0175 0" rpy="${pi/2} 0 0"/>
         <axis xyz="0 0 -1"/> <!--for wheel to spin around z axis-->
     </joint>
 
@@ -335,6 +367,9 @@
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </xacro:inertial_cylinder>
     </link>
-
+    
+    <gazebo reference="right_front_wheel">
+        <material>Gazebo/White</material>
+    </gazebo>
 
 </robot>
